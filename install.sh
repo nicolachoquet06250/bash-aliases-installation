@@ -30,7 +30,8 @@ for repo_name in "${repos[@]}";do
             ln -s "$(pwd)/${repo_name}/.githooks/post-checkout" "$(pwd)/${repo_name}/.git/hooks/post-checkout"
           fi
 
-          . "${repo_name}/.git/hooks/post-checkout install-script"
+          # shellcheck disable=SC1090
+          . "$(pwd)/${repo_name}/.git/hooks/post-checkout" "install-script"
         fi
     fi
 done

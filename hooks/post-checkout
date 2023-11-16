@@ -3,10 +3,3 @@
 if [[ -f "$(pwd)/install.sh" ]];then
   echo "${SUDO_PASSWD}" | sudo -S chmod +X "$(pwd)/install.sh"
 fi
-
-if {
-    [[ -f "$(pwd)/.githooks/post-checkout" ]] &&
-    [[ ! -f "$(pwd)/.git/hooks/post-checkout" ]]
-};then
-    ln -s "$(pwd)/.githooks/post-checkout" "$(pwd)/.git/hooks/post-checkout"
-fi

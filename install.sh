@@ -20,7 +20,17 @@ for repo_name in "${repos[@]}";do
         echo "trop grand"
     elif [[ $total_count -eq 1 ]];then
         repo="$(jq -r ".items[0].ssh_url" <<<"$curl_result")"
-        
-        git clone $repo
+
+        if [[ ! -d "$(pwd)/${repo_name}" ]];then
+          git clone "${repo}"
+          if {
+              [[ -f "$(pwd)/.githooks/post-checkout" ]] &&
+              [[ ! -f "$(pwd)/.git/hooks/post-checkout" ]]
+          };then
+            ln -s "${repo_name}/.githooks/post-checkout" "${repo_name}/.git/hooks/post-checkout"
+          else
+            . "${repo_name}/.git/hooks/post-checkout"
+          fi
+        fi
     fi
 done

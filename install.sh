@@ -24,6 +24,7 @@ for repo_name in "${repos[@]}";do
         if [[ ! -d "$(pwd)/${repo_name}" ]];then
           echo "${repo}"
           git clone "${repo}"
+
           if {
               [[ -f "$(pwd)/${repo_name}/.githooks/post-checkout" ]] &&
               [[ ! -f "$(pwd)/${repo_name}/.git/hooks/post-checkout" ]]
@@ -33,13 +34,6 @@ for repo_name in "${repos[@]}";do
 
           # shellcheck disable=SC1090
           . "$(pwd)/${repo_name}/.git/hooks/post-checkout" "install-script"
-        else
-#          echo "$(pwd)/${repo_name}"
-          # shellcheck disable=SC2164
-#          cd "$(pwd)/${repo_name}"
-#          git pull origin main -- "$(pwd)/${repo_name}"
-          git --work-tree="$(pwd)/${repo_name}" checkout
-#          cd ../
         fi
     fi
 done

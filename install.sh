@@ -22,7 +22,6 @@ for repo_name in "${repos[@]}";do
         repo="$(jq -r ".items[0].ssh_url" <<<"$curl_result")"
 
         if [[ ! -d "$(pwd)/${repo_name}" ]];then
-          echo "${repo}"
           git clone "${repo}"
 
           if {

@@ -33,6 +33,13 @@ for repo_name in "${repos[@]}";do
 
           # shellcheck disable=SC1090
           . "$(pwd)/${repo_name}/.git/hooks/post-checkout" "install-script"
+        else
+#          echo "$(pwd)/${repo_name}"
+          # shellcheck disable=SC2164
+#          cd "$(pwd)/${repo_name}"
+#          git pull origin main -- "$(pwd)/${repo_name}"
+          git --work-tree="$(pwd)/${repo_name}" checkout
+#          cd ../
         fi
     fi
 done

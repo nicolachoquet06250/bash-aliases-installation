@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "${SUDO_PASSWD}" | sudo -S chmod +X "$(pwd)/install.sh"
+
+rm -rf "$(pwd)/hooks/post-checkout"

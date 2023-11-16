@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if {
+    [[ -f "$(pwd)/$repo_name/.githooks/post-checkout" ]] && 
+    [[ ! -f "$(pwd)/$repo_name/.git/hooks/post-checkout" ]]
+};then
+    ln -s "$(pwd)/$repo_name/.githooks/post-checkout" "$(pwd)/$repo_name/.git/hooks/post-checkout"
+fi

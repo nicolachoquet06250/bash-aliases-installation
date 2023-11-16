@@ -24,13 +24,13 @@ for repo_name in "${repos[@]}";do
         if [[ ! -d "$(pwd)/${repo_name}" ]];then
           git clone "${repo}"
           if {
-              [[ -f "$(pwd)/.githooks/post-checkout" ]] &&
-              [[ ! -f "$(pwd)/.git/hooks/post-checkout" ]]
+              [[ -f "$(pwd)/${repo_name}/.githooks/post-checkout" ]] &&
+              [[ ! -f "$(pwd)/${repo_name}/.git/hooks/post-checkout" ]]
           };then
-            ln -s "${repo_name}/.githooks/post-checkout" "${repo_name}/.git/hooks/post-checkout"
-          else
-            . "${repo_name}/.git/hooks/post-checkout"
+            ln -s "$(pwd)/${repo_name}/.githooks/post-checkout" "$(pwd)/${repo_name}/.git/hooks/post-checkout"
           fi
+
+          . "${repo_name}/.git/hooks/post-checkout install-script"
         fi
     fi
 done
